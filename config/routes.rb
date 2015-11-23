@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+
+  root 'application#index'
+
+  get 'application/angular'
+
+  # routes for todos
+  resources :todos, only: [:index, :create], defaults: { format: :json }
+  delete '/todos/:id' => 'todos#destroy'
+  patch '/todos/:id' => 'todos#update', defaults: {format: :json}
+  put '/todos/:id' => 'todos#update', defaults: {format: :json}
+  get '/todos/:id' => 'todos#show', defaults: {format: :json}
+
+  #routes for user
+  resources :users, only: [:create]
+
+  #routes for session
+  get '/session' => 'session#amILoggedIn', defaults: { format: :json }
+  post '/session' => 'session#create'
+  delete '/session' => 'session#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
