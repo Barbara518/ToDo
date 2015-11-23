@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html ng-app = "TodoApp">
 <head>
   <title>ToDo</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <%= stylesheet_link_tag    'application', 'normalize.css', 'skeleton.css', 'main',  media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'angular', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if flash[:message]%>
+  <div id="flashmessage">
+    <%= flash[:message]%>
+  </div>
+  <%end%>
 
+<ng-view>
 <%= yield %>
 
 </body>
