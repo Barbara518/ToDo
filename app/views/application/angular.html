@@ -1,0 +1,50 @@
+<span ng-controller="SessionController as sessionCtrl">
+
+  <form class="logout"  ng-submit="sessionCtrl.deleteSession()">
+    <input type="submit" value="Logout">
+  </form>
+
+</span>
+
+<main ng-controller="todoController as todoCtrl">
+
+<section class="new">
+<form ng-submit="todoCtrl.createTodo()">
+  <input type="text" class="newDes" ng-model="todoCtrl.todos.newDescription" placeholder="Conquer The World" maxlength="100"></br>
+  <input type="date" class="newDate" ng-model="todoCtrl.todos.newDate"></br>
+  <input type="submit" class="mustDo" value="Must Do">
+</form>
+</section>
+
+<section id="goop">
+  <ul ng-repeat="todo in todoCtrl.todos | orderBy: 'due_date'" >
+
+    <li>
+
+      <span ng-hide="todo.editThis">
+        <span > {{todo.description}}
+              </br>by</br>
+                {{todo.due_date}}
+        </span> </br>
+        <button ng-click="todo.editThis = !todo.editThis"> Edit </button>
+      </span>
+
+      <form
+      class = "edit"
+      ng-show="todo.editThis"
+      ng-submit="todoCtrl.updateTodo(todo)">
+        <input type="text" class="editDes" ng-model="todo.description" placeholder="{{todo.description}}" maxlength="100"></br>
+        <input type="text" class="editDate" ng-model="todo.due_date" placeholder="{{todo.due_date}}"></br>
+        <input type="submit" ng-click=" todo.editThis = '' " value="Update">
+      </form></br>
+
+      <form class="delete"  ng-submit="todoCtrl.deleteTodo(todo)">
+        <input type="submit" value="Done">
+      </form>
+
+    </li>
+
+  </ul>
+</section>
+
+</main>
